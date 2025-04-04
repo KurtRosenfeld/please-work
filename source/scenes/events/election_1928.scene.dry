@@ -185,6 +185,12 @@ on-departure: nazi_urgency = 1 if (nazi_urgency == 0 and nsdap_r >= 15)
 on-display: {!
 data = [
     {
+        "id": "ap",
+        "legend": "AP",
+        "name": "AP",
+        "seats": Math.round(Q.ap_r*5),
+    },
+    {
         "id": "kpd",
         "legend": "KPD",
         "name": "KPD",
@@ -205,6 +211,12 @@ data = data.concat([
         "legend": "SPD",
         "name": "SPD",
         "seats": Math.round(Q.spd_r*5),
+    },
+    {
+        "id": "sbp",
+        "legend": "SBP",
+        "name": "SBP",
+        "seats": Math.round(Q.sbp_r*5),
     },
     {
         "id": "ddp",
@@ -279,7 +291,11 @@ go-to: coalition_menu
 
 [? if sapd_formed : {!<tr><td><div class="box" style='background-color:#C40000'> </div> !}SAPD: {!</td><td>!} [+ sapd_r +]% {!</td><td>!} [+ str_change_sapd +] {!</td></tr>!} ?]
 
+{!<tr><td><div class="box" style='background-color:#373737'> </div> !}AP: {!</td><td>!} [+ ap_r +]% {!</td><td>!} [+ str_change_ap +] {!</td></tr>!}
+
 {!<tr><td><div class="box" style='background-color:#8B0000'> </div> !}KPD: {!</td><td>!} [+ kpd_r +]% {!</td><td>!} [+ str_change_kpd +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#466334'> </div> !}SBP: {!</td><td>!} [+ sbp_r +]% {!</td><td>!} [+ str_change_sbp +] {!</td></tr>!}
 
 {!<tr><td><div class="box" style='background-color:#DCCA4A'> </div> !} [+ ddp_name +]: {!</td><td>!} [+ ddp_r +]% {!</td><td>!} [+ str_change_ddp +] {!</td></tr>!}
 
@@ -304,6 +320,8 @@ Grand Coalition (SPD + Z + BVP + [+ ddp_name +] + DVP): [+ grand_coalition +]%
 
 Bourgeois Coalition (Z + BVP + [+ ddp_name +] + DVP + Others): [+ bourgeois_coalition +]%
 
+Broad Coalition (SPD + SBP + Z + [+ ddp_name +] + Others): [+ broad_coalition +]%
+
 Right-wing Coalition (Z + BVP + DVP + Others + DNVP): [+ right_coalition +]%
 
 [? if nazi_urgency <= 1 and nsdap_r >= 15 : The rapid rise in NSDAP votes is extremely worrying. Many had believed that the party was moribound; now, some of us consider it to be the greatest threat to democracy in Germany. ?]
@@ -317,6 +335,7 @@ There are some potential coalition arrangements.
 - @spd_majority
 - @weimar_coalition
 - @grand_coalition
+- @broad_coalition
 - @new_grand_coalition
 - @unity_government
 - @far_right_coalition
@@ -328,6 +347,11 @@ There are some potential coalition arrangements.
 
 # TODO: black-brown coalition
 
+
+@broad_coalition
+title: it is broad
+subtitle: SPD + SBP + Z + [+ ddp_name +] + others([+ broad_coalition +]%)
+on-arrival: spd_in_government = 1; chancellor = "Breitscheid"; chancellor_party = "SPD"; sbp_relation += 2; in_weimar_coalition = 0; in_grand_coalition = 0; coalition_dissent = 0;
 
 @popular_front_coalition
 title: A new "Popular Front" coalition?
@@ -450,10 +474,10 @@ Alternatively, Braun could use the emergency powers of the presidency. Article 4
 
 @left_coalition
 title: Is a United Left coalition possible?
-subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] ([+ left_coalition +]%)
-unavailable-subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] ([+ left_coalition +]%). [? if kpd_relation < 50 : We do not have adequate relations with the KPD. ?][? if communist_coalition < 3 : The Communists are too committed to their radical ways to partake in government. ?]
+subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] + AP ([+ left_coalition +]%)
+unavailable-subtitle: SPD + KPD [? if sapd_formed: + SAPD ?] + AP ([+ left_coalition +]%). [? if kpd_relation < 50 : We do not have adequate relations with the KPD. ?][? if communist_coalition < 3 : The Communists are too committed to their radical ways to partake in government. ?]
 view-if: left_coalition >= 50
-choose-if: (kpd_relation >= 50 or (kpd_party_leader == "Conciliators" and kpd_relation >= 40)) and communist_coalition >= 3
+choose-if: (kpd_relation >= 50 or (kpd_party_leader == "Conciliators" and kpd_relation >= 40)) and communist_coalition >= 3 and ap_relation >= 40
 
 There are enough votes for a SPD + KPD coalition government, if such a thing were actually possible.
 
