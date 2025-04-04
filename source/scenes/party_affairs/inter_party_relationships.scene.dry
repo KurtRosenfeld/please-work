@@ -15,8 +15,16 @@ The SPD cannot govern by itself yet. Because we do not have an electoral majorit
 - @liberals: Strengthen our bonds with the left-liberal German Democratic Party and conservative-liberal German People's Party.
 - @center: Strengthen our bonds with the Catholic Center Party.
 - @kpd: Work towards repairing relationships with the Communist Party.
+- @others: Create new relations with different parties.
 - @spd_alone: The SPD can stand alone for now.
 - @easy_discard
+
+
+@others
+subtitle: -1 resources
+choose-if: resources >= 1
+unavailable-subtitle: Not enough resources.
+on-arrival: resources -= 1; sbp_relations += 3; ap_relations += 1
 
 
 @kpd
