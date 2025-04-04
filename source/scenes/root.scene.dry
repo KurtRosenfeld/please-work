@@ -314,7 +314,7 @@ Q.sbp_r = 2;
 Q.z_r = 17;
 Q.ddp_r = 6;
 Q.dvp_r = 10;
-Q.dnvp_r = 20;
+Q.dnvp_r = 19;
 Q.nsdap_r = 3;
 Q.other_r = 8;
 
