@@ -170,7 +170,7 @@ Z + BVP: [+ z_votes +]%
 
 SBP: [+ sbp_votes +]%
 
-AP: [+ ap_votes + ]%
+AP: [+ ap_votes +]%
 
 KPD: [+ kpd_votes +]%
 
