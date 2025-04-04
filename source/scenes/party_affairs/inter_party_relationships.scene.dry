@@ -24,7 +24,7 @@ The SPD cannot govern by itself yet. Because we do not have an electoral majorit
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; sbp_relations += 3; ap_relations += 1
+on-arrival: resources -= 1; sbp_relations += 7; ap_relations += 5
 
 
 @kpd
